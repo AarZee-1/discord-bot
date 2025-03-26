@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fair-ceiling-454016-u1",
+  "private_key_id": "6de8587783ba3874b3735d3b8e92dc0dc41d3c0f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDo03gBB/C8c3LL\nNIRn1lF1FA6fCekU2P6Zec+hmLsjBp8sbIavUpUPl/IBlY83fstfgPdIWim47f2Q\nH407JN07dS/EoCD5eyVItKgie0SbyrYPjTmp1zJnlOiNAtBNUh4K1v48MhKhCSbI\nYqSzItWJNHuV/tWPntSBLSNCKpSkKOPbIeOZFfUf/hae5yFxvDunXi7AaxAlt869\nDs3WhRVHILXSGO8EDvVdZ6aaykB4Smqg6NTK7ZjwpXrequ2txadHzEuUcUdilDQ/\n6U7oDZT4k9xTlIqprzeeJ1ldw5MKtFwYFG0QMHUExV/43OSOOh1Y6l8KtOuZ4LL4\nK/mXMQ1zAgMBAAECggEAYz3YdiALVlijgsh088nf2Nbe0J2p03AXPhY1Eb2Hbwug\nh5AO7OZ3kTkEN/anIFGUoLXZMeb0x9Xx8h/w1FgHURPHc7mJtK3wG4id7my6tul2\nJzTccm+/FXXcllavsXWiRp6TqdbyJ+A9vsaFS7I6cQyE7U+9ekWKcTFrSQXbbAkN\nu733xyvtTPw8P5Mn1BbihsAfph2OzBUI+qDlp9Z7FRTWKxp2pZweMo4YRzNcnPxe\nbYnQwpbny8m8F6/0jUcVjRJiaTjK1bYXD64+QDBOuL306cxTMJafrL9UhNprsCYw\ntaaM/ejP97cZOblhzEwFnCD6Xri57E/FQERs8MPxYQKBgQD6icu+D9JPTEUmgfmU\nc4iyA4imDDHw57FJToWn4btvr9BTznY7+5JmTG7z1vzsySa1LrheTFWqt74UcaZC\nkCyG/HHEmFQGEi8VSXFiz1vReZFV64DMtYIsvzdnxMK95XF/ODTcHxPcMWDFkEvb\no9Xg6TxTw7JUfXyKNvZrQBhlgwKBgQDt5tMV61K6Q4wh4pgzleElf2jvdY6Rtvmn\nese35b0qgKIt+xa6jAyJzMdLxpBSrpuuiYKBsHoWr0pbAOPlMhxeA2pw4nGVPArK\nzS5mKKKGR38a+knkmYkFO0QPEV2RkryseJT949WtSM/4fTLXUn9q8V2BThMk2ifc\n/D9cF28lUQKBgQCpa9Fpf416rlr8xVwfNVm094rKruh+vk83AXCErLNxvXSll7KA\nsYi4wOsu3a0/+m7Aiw2GRxyPS52weYIy9QgHaGMOzOvVByrrvDR+2zZ+GzVa4tzA\nkeWrmMtA0t/WRnhPzZSBXkqx1npYX1HM/6e8ZjyzcF0BobI8TRqqQDe/PQKBgFuV\nCVudzKoRyMdeoLLzFspFoxLT0X98zdzQYkQD9+99t3E2AMjtkwIVR/9+wB5kQ2BM\nZWYhls5Wyqv/yrt3r/3tGLO+KHWHuKvbkuoW6IIC0gaDpaCQDnRqHUgjqj6ZG3LV\ntJ2McLyVlCIXqFPF2XFE23ckpDACn2ft30JHby0RAoGAawnW8e11V7L4JP9aP5er\nxZWU4FfOfGZm5CJA4U7+/KumSER6q3obvvkqaoGysYOSNn7pdKXundmAPJ86pU0x\ncbBxPnyhWg7g7sDy4tUwd9bJtlGv/SYTdvVjSf1SiOvNF6gEixWmnsNe2ND6uy6a\nvaxjUPleLBTWrtlzq84x0yk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "discord-bot-service@fair-ceiling-454016-u1.iam.gserviceaccount.com",
+  "client_id": "107658580832478164378",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/discord-bot-service%40fair-ceiling-454016-u1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
