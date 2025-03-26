@@ -2,22 +2,23 @@ import discord
 from discord.ext import commands
 import gspread
 import re
+import os
 from google.oauth2.service_account import Credentials
+import json
 
-# Bot Token (Replace with your actual bot token)
-BOT_TOKEN = "MTM1MTIyMjQwODE5NTA4NDQxNA.GePxrr.s3uKJktXTX3c5LiRujSA1CLIevqFBMpS-hpLDU"  
+# Load environment variables
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store in Railway
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Store in Railway
 
-# Google Sheets Setup
-SERVICE_ACCOUNT_FILE = "fair-ceiling-454016-u1-6de8587783ba.json"  # JSON key file  
-SPREADSHEET_ID = "1YxJxVv56zoZ6G388Tp7r1USzAyQ47g8IIWtfVTeQ550"  # Google Sheets ID  
+# Load Google Service Account credentials from Railway environment variable
+SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")
+creds_dict = json.loads(SERVICE_ACCOUNT_JSON)  # Convert string back to dictionary
+creds = Credentials.from_service_account_info(creds_dict, scopes=["https://www.googleapis.com/auth/spreadsheets"])
+client = gspread.authorize(creds)
+sheet = client.open_by_key(SPREADSHEET_ID).sheet1  # Access first sheet
 
 # Email Validation Regex
 EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-
-# Authenticate with Google Sheets
-creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=["https://www.googleapis.com/auth/spreadsheets"])
-client = gspread.authorize(creds)
-sheet = client.open_by_key(SPREADSHEET_ID).sheet1  # Access first sheet
 
 # Discord Bot Setup
 intents = discord.Intents.default()
