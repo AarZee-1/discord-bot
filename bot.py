@@ -7,16 +7,22 @@ import json
 from google.oauth2.service_account import Credentials
 
 # Load environment variables
-BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store in Contabo
-SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Store in Contabo
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # Stored securely on Contabo
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Stored securely on Contabo
+SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")  # Stored securely on Contabo
 
-# Save Google Service Account JSON to a file
-SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")
-with open("service_account.json", "w") as f:
-    f.write(SERVICE_ACCOUNT_JSON)
+# Check if all environment variables are set
+if not BOT_TOKEN or not SPREADSHEET_ID or not SERVICE_ACCOUNT_JSON:
+    raise ValueError("❌ Missing environment variables. Check your Contabo setup.")
 
-# Load credentials from the saved file
-creds = Credentials.from_service_account_file("service_account.json", scopes=["https://www.googleapis.com/auth/spreadsheets"])
+# Convert JSON string to dictionary
+try:
+    service_account_data = json.loads(SERVICE_ACCOUNT_JSON)
+except json.JSONDecodeError:
+    raise ValueError("❌ Invalid JSON format in SERVICE_ACCOUNT_JSON")
+
+# Authenticate with Google Sheets API
+creds = Credentials.from_service_account_info(service_account_data, scopes=["https://www.googleapis.com/auth/spreadsheets"])
 client = gspread.authorize(creds)
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1  # Access first sheet
 
