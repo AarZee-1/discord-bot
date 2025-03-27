@@ -39,6 +39,7 @@ EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 # Discord Bot Setup
 intents = discord.Intents.default()
 intents.members = True  # Ensure the bot can read member details
+intents.message_content = True # Ensure the bot can read messages
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Store user data temporarily
