@@ -3,17 +3,20 @@ from discord.ext import commands
 import gspread
 import re
 import os
-from google.oauth2.service_account import Credentials
 import json
+from google.oauth2.service_account import Credentials
 
 # Load environment variables
-BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store in Railway
-SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Store in Railway
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # Store in Contabo
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")  # Store in Contabo
 
-# Load Google Service Account credentials from Railway environment variable
+# Save Google Service Account JSON to a file
 SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")
-creds_dict = json.loads(SERVICE_ACCOUNT_JSON)  # Convert string back to dictionary
-creds = Credentials.from_service_account_info(creds_dict, scopes=["https://www.googleapis.com/auth/spreadsheets"])
+with open("service_account.json", "w") as f:
+    f.write(SERVICE_ACCOUNT_JSON)
+
+# Load credentials from the saved file
+creds = Credentials.from_service_account_file("service_account.json", scopes=["https://www.googleapis.com/auth/spreadsheets"])
 client = gspread.authorize(creds)
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1  # Access first sheet
 
@@ -27,6 +30,9 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Store user data temporarily
 pending_verifications = {}
+
+# Replace with your actual server ID
+GUILD_ID = 1350175315544244234  # Replace with your Discord server's actual ID
 
 @bot.event
 async def on_member_join(member):
@@ -81,15 +87,18 @@ async def on_message(message):
             sheet.append_row([str(user_id), name, email, country])
 
             # Assign the Verified Role
-            guild = bot.get_guild(message.guild.id)  # Get the server
-            member = guild.get_member(user_id)
-            role = discord.utils.get(guild.roles, name="Verified")  # Change to your verified role
+            guild = bot.get_guild(GUILD_ID)  # Use the hardcoded server ID
+            if guild:
+                member = guild.get_member(user_id)
+                role = discord.utils.get(guild.roles, name="Verified")  # Change to your verified role
 
-            if role and member:
-                await member.add_roles(role)
-                await message.author.send("✅ You are now verified and have access to the server!")
+                if role and member:
+                    await member.add_roles(role)
+                    await message.author.send("✅ You are now verified and have access to the server!")
+                else:
+                    await message.author.send("⚠️ Verification failed: Role not found.")
             else:
-                await message.author.send("⚠️ Verification failed: Role not found.")
+                await message.author.send("⚠️ Could not fetch the server. Please contact an admin.")
 
             # Remove user from pending verification
             del pending_verifications[user_id]
