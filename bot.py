@@ -15,16 +15,23 @@ SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")  # Stored securely on C
 if not BOT_TOKEN or not SPREADSHEET_ID or not SERVICE_ACCOUNT_JSON:
     raise ValueError("❌ Missing environment variables. Check your Contabo setup.")
 
-# Convert JSON string to dictionary
+# Read the JSON file properly
 try:
-    service_account_data = json.loads(SERVICE_ACCOUNT_JSON)
-except json.JSONDecodeError:
-    raise ValueError("❌ Invalid JSON format in SERVICE_ACCOUNT_JSON")
+    with open(SERVICE_ACCOUNT_JSON, "r") as f:
+        service_account_data = json.load(f)  # Correctly load JSON from file
+except Exception as e:
+    raise ValueError(f"❌ Error reading service account JSON file: {e}")
+
+# Save JSON data to another file for compatibility
+with open("service_account.json", "w") as f:
+    json.dump(service_account_data, f)
 
 # Authenticate with Google Sheets API
 creds = Credentials.from_service_account_info(service_account_data, scopes=["https://www.googleapis.com/auth/spreadsheets"])
 client = gspread.authorize(creds)
 sheet = client.open_by_key(SPREADSHEET_ID).sheet1  # Access first sheet
+
+print("✅ JSON File Loaded Successfully!")  # Debugging message
 
 # Email Validation Regex
 EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
